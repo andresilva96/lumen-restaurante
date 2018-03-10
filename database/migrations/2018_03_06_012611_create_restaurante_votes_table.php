@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRestauranteVotesTable extends Migration
+class CreateRestaurantVotesCreate extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,13 @@ class CreateRestauranteVotesTable extends Migration
      */
     public function up()
     {
-        Schema::create('restaurante_votes', function (Blueprint $table) {
+        Schema::create('restaurant_votes', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('points');
+            $table->text('comment');
+            $table->text('reply');
+            $table->integer('user_id');
+            $table->integer('restaurant_id');
             $table->timestamps();
         });
     }
@@ -26,6 +31,6 @@ class CreateRestauranteVotesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('restaurante_votes');
+        Schema::drop('restaurant_votes');
     }
 }

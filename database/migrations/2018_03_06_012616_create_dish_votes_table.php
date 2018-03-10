@@ -15,6 +15,11 @@ class CreateDishVotesTable extends Migration
     {
         Schema::create('dish_votes', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('points');
+            $table->text('comment');
+            $table->text('reply');
+            $table->integer('user_id');
+            $table->integer('dish_id');
             $table->timestamps();
         });
     }
@@ -26,6 +31,6 @@ class CreateDishVotesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dish_votes');
+        Schema::drop('dish_votes');
     }
 }

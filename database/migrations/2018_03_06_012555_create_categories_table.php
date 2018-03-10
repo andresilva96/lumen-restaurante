@@ -15,7 +15,8 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->string('name');
+            $table->integer('total_restaurants')->default(0);
         });
     }
 
@@ -26,6 +27,6 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::drop('categories');
     }
 }
