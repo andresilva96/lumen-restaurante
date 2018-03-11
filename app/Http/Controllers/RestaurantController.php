@@ -6,7 +6,7 @@ use App\Restaurant;
 
 class RestaurantController extends Controller
 {
-    use ApiController;
+    use ApiControllerTrait;
 
     protected $model;
 
