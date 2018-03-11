@@ -6,7 +6,7 @@ trait ApiController
 {
     public function index()
     {
-        $result = $this->model->paginator();
+        $result = $this->model->paginate();
         return response()->json($result);
     }
 }
