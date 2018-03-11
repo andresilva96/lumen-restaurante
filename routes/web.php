@@ -17,4 +17,8 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix' => 'api/v1'], function () use ($router) {
     $router->get('restaurant', 'RestaurantController@index');
+    $router->get('restaurant/{id}', 'RestaurantController@show');
+    $router->post('restaurant', 'RestaurantController@insert');
+    $router->put('restaurant/{id}', 'RestaurantController@update');
+    $router->delete('restaurant/{id}', 'RestaurantController@delete');
 });
