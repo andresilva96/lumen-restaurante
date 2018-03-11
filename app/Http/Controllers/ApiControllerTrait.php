@@ -20,6 +20,7 @@ trait ApiControllerTrait
 
     public function insert(Request $request)
     {
+        $this->validate($request, $this->rules ?? [], $this->message ?? []);
         $result = $this->model->create($request->all());
         return response()->json($result);
 
@@ -27,6 +28,7 @@ trait ApiControllerTrait
 
     public function update(Request $request, $id)
     {
+        $this->validate($request, $this->rules ?? [], $this->message ?? []);
         $result = $this->model->find($id);
         // precisa obter o objeto para atualizar
         $result->update($request->all());
