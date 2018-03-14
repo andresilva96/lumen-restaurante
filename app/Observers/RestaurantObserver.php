@@ -2,21 +2,27 @@
 
 namespace App\Observers;
 
+use App\Restaurant;
+
 class RestaurantObserver
 {
     use UploadObserverTrait;
 
-    public function creating()
-    {
+    protected $field = 'photo';
+    protected $path = 'restaurant/';
 
+    public function creating(Restaurant $model)
+    {
+        $this->sendFile($model);
     }
 
-    public function updating()
+    public function deleting(Restaurant $model)
     {
-
+        $this->removeFile($model);
     }
-    public function deleting()
-    {
 
+    public function updating(Restaurant $model)
+    {
+        $this->updateFile($model);
     }
 }
