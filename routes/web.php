@@ -11,11 +11,13 @@
 |
 */
 
+Dusterio\LumenPassport\LumenPassport::routes($router);
+
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->group(['prefix' => 'api/v1'], function () use ($router) {
+$router->group(['prefix' => 'api/v1', 'middleware' => ['auth']], function () use ($router) {
     $router->get('restaurant', 'RestaurantController@index');
     $router->get('restaurant/{id}', 'RestaurantController@show');
     $router->post('restaurant', 'RestaurantController@insert');
