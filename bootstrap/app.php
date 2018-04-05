@@ -23,7 +23,12 @@ $app = new Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
 
- $app->withFacades();
+$app->configure('cors');
+
+ $app->withFacades(true, [
+     Tymon\JWTAuth\Facades\JWTAuth::class => 'JWTAuth',
+     Tymon\JWTAuth\Facades\JWTFactory::class => 'JWTFactory'
+ ]);
 
  $app->withEloquent();
 
@@ -48,17 +53,6 @@ $app->singleton(
     App\Console\Kernel::class
 );
 
-$app->singleton(
-    Illuminate\Contracts\Filesystem\Factory::class,
-    function ($app) {
-        return new Illuminate\Filesystem\FilesystemManager($app);
-    }
-);
-
-$app->singleton('filesystem', function ($app) {
-    return $app->loadComponent('filesystems', Illuminate\Filesystem\FilesystemServiceProvider::class);
-});
-
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
@@ -76,7 +70,12 @@ $app->singleton('filesystem', function ($app) {
 
  $app->routeMiddleware([
      'auth' => App\Http\Middleware\Authenticate::class,
+     'cors' => \Barryvdh\Cors\HandleCors::class,
  ]);
+
+$app->middleware([
+    \Barryvdh\Cors\HandleCors::class
+]);
 
 /*
 |--------------------------------------------------------------------------
@@ -89,11 +88,11 @@ $app->singleton('filesystem', function ($app) {
 |
 */
 
- $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
-// $app->register(App\Providers\EventServiceProvider::class);
-$app->register(Laravel\Passport\PassportServiceProvider::class);
-$app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
+$app->register(App\Providers\AppServiceProvider::class);
+$app->register(App\Providers\AuthServiceProvider::class);
+$app->register(\Barryvdh\Cors\ServiceProvider::class);
+//$app->register(App\Providers\EventServiceProvider::class);
+$app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -112,6 +111,5 @@ $app->router->group([
     require __DIR__.'/../routes/web.php';
 });
 
-$app->configure('filesystems');
 
 return $app;
