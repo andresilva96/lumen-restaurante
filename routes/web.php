@@ -12,7 +12,8 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    //return $router->app->version();
+    return view('teste');
 });
 
 $router->group(['prefix' => 'api/v1', 'middleware' => ['cors']], function () use ($router) {
@@ -31,6 +32,7 @@ $router->group(['prefix' => 'api/v1', 'middleware' => ['cors']], function () use
         $router->get('restaurant/{id}', 'RestaurantController@show');
         $router->post('restaurant', 'RestaurantController@insert');
         $router->put('restaurant/{id}', 'RestaurantController@update');
+        $router->post('restaurant/{id}', 'RestaurantController@update');
         $router->delete('restaurant/{id}', 'RestaurantController@delete');
     });
 });
