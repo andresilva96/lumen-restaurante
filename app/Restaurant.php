@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Restaurant extends Model
 {
-    protected $fillable = ['name', 'description', 'photo'];
+    protected $fillable = ['name', 'description', 'photo', 'user_id'];
     protected $appends = ['photo_full_url'];
 
     protected function getPhotoFullUrlAttribute()

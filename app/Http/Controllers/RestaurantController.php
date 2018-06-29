@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Restaurant;
-
 class RestaurantController extends Controller
 {
     use ApiControllerTrait;
@@ -23,5 +22,12 @@ class RestaurantController extends Controller
             'required' => ':attribute é obrigatório.',
             'min' => ':attribute precisa de pelo menos :min caracteres.',
         ];
+    }
+
+    public function restaurantByUser()
+    {
+        $user = \JWTAuth::parseToken()->authenticate();
+        $restaurant = \App\User::find($user->id)->restaurant;
+        return response()->json($restaurant);
     }
 }

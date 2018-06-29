@@ -29,6 +29,7 @@ $router->group(['prefix' => 'api/v1', 'middleware' => ['cors']], function () use
 
     Route::group(['middleware' => 'auth'], function ($router) {
         $router->get('restaurant', 'RestaurantController@index');
+        $router->get('restaurant/user', 'RestaurantController@restaurantByUser');
         $router->get('restaurant/{id}', 'RestaurantController@show');
         $router->post('restaurant', 'RestaurantController@insert');
         $router->put('restaurant/{id}', 'RestaurantController@update');
