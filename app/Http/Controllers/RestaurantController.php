@@ -31,7 +31,7 @@ class RestaurantController extends Controller
     {
         $user = \JWTAuth::parseToken()->authenticate();
         $restaurant = $this->show($user->id);
-        return response()->json($restaurant);
+        return response()->json($restaurant->original);
     }
 
     public function address(Request $request)
