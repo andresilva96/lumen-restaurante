@@ -35,5 +35,6 @@ $router->group(['prefix' => 'api/v1', 'middleware' => ['cors']], function () use
         $router->put('restaurant/{id}', 'RestaurantController@update');
         $router->post('restaurant/{id}', 'RestaurantController@update');
         $router->delete('restaurant/{id}', 'RestaurantController@delete');
+        $router->put('restaurant/address', 'RestaurantController@address');
     });
 });
