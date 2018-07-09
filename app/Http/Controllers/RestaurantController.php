@@ -27,6 +27,13 @@ class RestaurantController extends Controller
         ];
     }
 
+    private function getIdRestaurant()
+    {
+        $user = \JWTAuth::parseToken()->authenticate();
+        $restaurant = \App\User::find($user->id)->restaurant;
+        return $restaurant->id;
+    }
+
     public function restaurantByUser()
     {
         $user = \JWTAuth::parseToken()->authenticate();
@@ -49,5 +56,13 @@ class RestaurantController extends Controller
         }
         $restaurant->address()->save($address);
         return response()->json($address);
+    }
+
+    public function upload(Request $request)
+    {
+        $data['photo'] = $request->file('photo');
+        $result = $this->model->findOrFail($this->getIdRestaurant());
+        $result->update($data);
+        return response()->json($result);
     }
 }
