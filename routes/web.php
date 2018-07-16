@@ -40,8 +40,7 @@ $router->group(['prefix' => 'api/v1', 'middleware' => ['cors']], function () use
         $router->post('restaurant/upload', 'RestaurantController@upload');
 
         $router->post('restaurant/photos', 'RestaurantPhotosController@insert');
-        $router->get('restaurant/photos/{id}', 'RestaurantPhotosController@insert');
-        $router->delete('restaurant/photos/{id}', 'RestaurantPhotosController@insert');
-
+        $router->get('restaurant/photos', 'RestaurantPhotosController@index');
+        $router->delete('restaurant/photos/{id}', 'RestaurantPhotosController@delete');
     });
 });

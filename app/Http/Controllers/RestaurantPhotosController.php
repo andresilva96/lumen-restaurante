@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\ApiControllerTrait;
 use App\RestaurantPhoto;
 use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller;
@@ -25,10 +24,17 @@ class RestaurantPhotosController extends Controller
         $this->model = $model;
     }
 
-    public function index(Request $request, $id)
+    private function getIdRestaurant()
+    {
+        $user = \JWTAuth::parseToken()->authenticate();
+        $restaurant = \App\User::find($user->id)->restaurant;
+        return $restaurant->id;
+    }
+
+    public function index(Request $request)
     {
         $results =  $this->model
-            ->where('restaurant_id', $id)
+            ->where('restaurant_id', $this->getIdRestaurant())
             ->get();
         
         return response()->json($results);
