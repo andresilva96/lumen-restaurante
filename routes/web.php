@@ -36,10 +36,16 @@ $router->group(['prefix' => 'api/v1', 'middleware' => ['cors']], function () use
         $router->post('restaurant/photos', 'RestaurantPhotosController@insert');
         $router->get('restaurant/photos', 'RestaurantPhotosController@index');
 
+        $router->post('restaurant/dishes', 'DishController@insert');
+        $router->get('restaurant/dishes', 'DishController@index');
+
         $router->get('restaurant/{id}', 'RestaurantController@show');
         $router->put('restaurant/{id}', 'RestaurantController@update');
         $router->post('restaurant/{id}', 'RestaurantController@update');
         $router->delete('restaurant/{id}', 'RestaurantController@delete');
         $router->delete('restaurant/photos/{id}', 'RestaurantPhotosController@delete');
+        $router->get('restaurant/dishes/{id}', 'DishController@show');
+        $router->delete('restaurant/dishes/{id}', 'DishController@delete');
+        $router->put('restaurant/dishes/{id}', 'DishController@update');
     });
 });
