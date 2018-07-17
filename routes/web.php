@@ -30,17 +30,16 @@ $router->group(['prefix' => 'api/v1', 'middleware' => ['cors']], function () use
     Route::group(['middleware' => 'auth'], function ($router) {
         $router->get('restaurant', 'RestaurantController@index');
         $router->get('restaurant/user', 'RestaurantController@restaurantByUser');
-        $router->get('restaurant/{id}', 'RestaurantController@show');
         $router->post('restaurant', 'RestaurantController@insert');
+        $router->put('restaurant/address', 'RestaurantController@address');
+        $router->post('restaurant/upload', 'RestaurantController@upload');
+        $router->post('restaurant/photos', 'RestaurantPhotosController@insert');
+        $router->get('restaurant/photos', 'RestaurantPhotosController@index');
+
+        $router->get('restaurant/{id}', 'RestaurantController@show');
         $router->put('restaurant/{id}', 'RestaurantController@update');
         $router->post('restaurant/{id}', 'RestaurantController@update');
         $router->delete('restaurant/{id}', 'RestaurantController@delete');
-
-        $router->put('restaurant/address', 'RestaurantController@address');
-        $router->post('restaurant/upload', 'RestaurantController@upload');
-
-        $router->post('restaurant/photos', 'RestaurantPhotosController@insert');
-        $router->get('restaurant/photos', 'RestaurantPhotosController@index');
         $router->delete('restaurant/photos/{id}', 'RestaurantPhotosController@delete');
     });
 });
