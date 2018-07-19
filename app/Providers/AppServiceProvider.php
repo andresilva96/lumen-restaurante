@@ -7,7 +7,7 @@ use App\Restaurant;
 use App\RestaurantPhoto;
 use App\Observers\RestaurantObserver;
 use App\Observers\RestaurantPhotoObserver;
-use App\Observers\Dish;
+use App\Dish;
 use App\Observers\DishObserver;
 
 class AppServiceProvider extends ServiceProvider
