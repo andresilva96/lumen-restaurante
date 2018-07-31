@@ -26,6 +26,7 @@ $router->group(['prefix' => 'api/v1', 'middleware' => ['cors']], function () use
             return response()->json(['error' => 'Cound not refresh token.'], 400);
         }
     });
+    $router->post('user', 'UserController@insert');
 
     Route::group(['middleware' => 'auth'], function ($router) {
         $router->get('restaurant', 'RestaurantController@index');

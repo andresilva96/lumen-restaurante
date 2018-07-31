@@ -18,6 +18,11 @@ class Restaurant extends Model
         return null;
     }
 
+    public function user()
+    {
+        return $this->belongsTo('\App\User');
+    }
+
     public function address()
     {
         return $this->hasOne('\App\Address');
