@@ -10,21 +10,21 @@ class RestaurantController extends Controller
     use ApiControllerTrait;
 
     protected $model;
-    protected $rules;
-    protected $message;
     protected $relationships = ['address'];
+    protected $rules = [
+        'name' => 'required|min:3',
+        'description' => 'required'
+    ];
+    protected $message = [
+        'required' => ':attribute é obrigatório.',
+        'min' => ':attribute precisa de pelo menos :min caracteres.',
+    ];
 
-    public function __construct(Restaurant $model)
+    public function __construct(Restaurant $model, Request $request)
     {
+        $user = \JWTAuth::parseToken()->authenticate();
+        $request['user_id'] = $user->id;
         $this->model = $model;
-        $this->rules = [
-            'name' => 'required|min:3',
-            'description' => 'required'
-        ];
-        $this->message = [
-            'required' => ':attribute é obrigatório.',
-            'min' => ':attribute precisa de pelo menos :min caracteres.',
-        ];
     }
 
     private function getIdRestaurant()
