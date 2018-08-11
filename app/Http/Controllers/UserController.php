@@ -14,8 +14,8 @@ class UserController extends Controller
     protected $model;
     protected $rules = [
         'name' => 'required',
-        'email' => 'required',
-        'password' => 'required|min:6'
+        'password' => 'min:6',
+        'password_confirm' => 'same:password',
     ];
     protected $messages = [
         'required' => ':attribute é obrigatório',
@@ -27,5 +27,20 @@ class UserController extends Controller
     {
         $request['password'] = app('hash')->make($request['password']);
         $this->model = $model;
+    }
+
+    public function updateUser(Request $request)
+    {
+        $user = \JWTAuth::parseToken()->authenticate();
+
+        $result = $this->model->find($user->id);
+        $result->update($request->all());
+        return response()->json($result);
+    }
+
+    public function getUser()
+    {
+        $user = \JWTAuth::parseToken()->authenticate();
+        return $this->show($user->id);
     }
 }
