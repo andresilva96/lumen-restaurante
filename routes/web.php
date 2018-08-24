@@ -47,7 +47,7 @@ $router->group(['prefix' => 'api/v1', 'middleware' => ['cors']], function () use
         $router->delete('restaurant/photos/{id}', 'RestaurantPhotosController@delete');
         $router->get('restaurant/dishes/{id}', 'DishController@show');
         $router->delete('restaurant/dishes/{id}', 'DishController@delete');
-        $router->put('restaurant/dishes/{id}', 'DishController@update');
+        $router->post('restaurant/dishes/{id}', 'DishController@update');
 
         $router->get('me', 'UserController@getUser');
         $router->put('change-password', 'UserController@updateUser');
